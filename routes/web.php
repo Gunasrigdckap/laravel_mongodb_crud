@@ -41,11 +41,24 @@ Route::get('/test-mongo', function () {
 Route::get('/create', function (Request  $request) {
     $success = CustomerMongoDB::create([
         'guid'=> '1',
-        'first_name'=> 'john',
-        'family_name' => 'Doe',
+        'first_name'=> 'guna',
+        'family_name' => 'sri',
         'email' => 'johndoe@gmail.com',
         'address' => '123 my street, my city, zip, state, country'
     ]);
+});
+
+Route::get('/createdata', function (Request $request) {
+    $data = [
+        'customer' => 'Sri',
+        'items' => [
+            ['name' => 'Product 1', 'quantity' => 2],
+            ['name' => 'Product 2', 'quantity' => 1],
+        ],
+    ];
+
+    // Assuming you want to return the data as a JSON response
+    return response()->json($data);
 });
 
 Route::get('/find_eloquent', function (Request  $request) {
@@ -62,11 +75,9 @@ Route::get('/delete_eloquent', function (Request  $request) {
 
 
 
-   $customer = CustomerMongoDB::find($id);
-   $customer->delete();
 
 
-   
+
 
 
 
