@@ -40,25 +40,42 @@ Route::get('/test-mongo', function () {
 
 Route::get('/create', function (Request  $request) {
     $success = CustomerMongoDB::create([
-        'guid'=> '1',
-        'first_name'=> 'guna',
+        'guid'=> '2',
+        'first_name'=> 'dharshini',
         'family_name' => 'sri',
-        'email' => 'johndoe@gmail.com',
-        'address' => '123 my street, my city, zip, state, country'
+        'email' => 'dhash@gmail.com',
+        'address' => '22, Anna salai.'
     ]);
 });
 
-Route::get('/createdata', function (Request $request) {
-    $data = [
-        'customer' => 'Sri',
-        'items' => [
-            ['name' => 'Product 1', 'quantity' => 2],
-            ['name' => 'Product 2', 'quantity' => 1],
-        ],
-    ];
+// Route::get('/createdata', function (Request $request) {
+//     $success = CustomerMongoDB::create([
+//         'guid'=> '3',
+//         'first_name'=> 'Raman',
+//         'family_name' => 'Prapha',
+//        'email' => ["ram@gmail.com", "raman@dckap.com"],
+//         'address' => [
+//             'street' => "Gandhi street",
+//             'city' => "Trichy",
+//             'pin code' => "620013",
+//         ],
+//     ]);
 
-    // Assuming you want to return the data as a JSON response
-    return response()->json($data);
+// });
+
+Route::get('/createdata', function (Request $request) {
+    $success = CustomerMongoDB::create([
+        'guid'=> '4',
+        'first_name'=> 'Abi',
+        'family_name' => 'Nice family',
+       'email' => ["abi@gmail.com", "abirami@dckap.com",["abii@gmail.com", "abiramiii@dckap.com"]],
+        'address' => [
+            'street' => "Neru street",
+            'city' => "Trichy",
+            'pin code' => "620017",
+        ],
+    ]);
+
 });
 
 Route::get('/find_eloquent', function (Request  $request) {
