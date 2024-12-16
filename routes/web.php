@@ -37,7 +37,7 @@ Route::get('/test-mongo', function () {
     return response()->json($collections);
 });
 
-
+//Create a data
 Route::get('/create', function (Request  $request) {
     $success = CustomerMongoDB::create([
         'guid'=> '2',
@@ -47,6 +47,9 @@ Route::get('/create', function (Request  $request) {
         'address' => '22, Anna salai.'
     ]);
 });
+
+
+//Create a nested data
 
 // Route::get('/createdata', function (Request $request) {
 //     $success = CustomerMongoDB::create([
@@ -63,6 +66,9 @@ Route::get('/create', function (Request  $request) {
 
 // });
 
+
+//Create nested data using arrays and objects
+
 Route::get('/createdata', function (Request $request) {
     $success = CustomerMongoDB::create([
         'guid'=> '4',
@@ -78,14 +84,21 @@ Route::get('/createdata', function (Request $request) {
 
 });
 
+
+//Read data
+
 Route::get('/find_eloquent', function (Request  $request) {
     $customer = CustomerMongoDB::where('guid', '1')->get();
 });
 
+
+//Update data using MongoDB query
 Route::get('/update_eloquent', function (Request  $request) {
     $result = CustomerMongoDB::where('guid', '1')->update( ['first_name' => 'Jimmy'] );
    });
 
+
+//delete data using MongoDB query
 Route::get('/delete_eloquent', function (Request  $request) {
     $result = CustomerMongoDB::where('guid', '1')->delete();
    });
