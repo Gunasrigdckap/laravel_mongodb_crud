@@ -37,6 +37,8 @@ Route::get('/test-mongo', function () {
     return response()->json($collections);
 });
 
+
+
 //Create a data
 Route::get('/create', function (Request  $request) {
     $success = CustomerMongoDB::create([
@@ -47,6 +49,7 @@ Route::get('/create', function (Request  $request) {
         'address' => '22, Anna salai.'
     ]);
 });
+
 
 
 //Create a nested data
@@ -102,9 +105,6 @@ Route::get('/update_eloquent', function (Request  $request) {
 Route::get('/delete_eloquent', function (Request  $request) {
     $result = CustomerMongoDB::where('guid', '1')->delete();
    });
-
-
-
 
 
 
