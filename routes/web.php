@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 
 
-Route::get('/test-mongo', function () {
+Route::get('/testmongo', function () {
     $client = new Client(env('DB_URI'));
     $database = $client->selectDatabase(env('DB_DATABASE'));
 
@@ -40,22 +40,25 @@ Route::get('/test-mongo', function () {
 
 
 //Create a data
-Route::get('/create', function (Request  $request) {
-    $success = CustomerMongoDB::create([
-        'guid'=> '2',
+Route::get('/create', function () {
+ $customer = CustomerMongoDB::create([
+        'guid'=> '6',
         'first_name'=> 'dharshini',
         'family_name' => 'sri',
         'email' => 'dhash@gmail.com',
         'address' => '22, Anna salai.'
     ]);
+  return response()->json([
+    'message' => 'Data created successfully',
+     'data' => $customer,
+  ]);
 });
-
 
 
 //Create a nested data
 
-// Route::get('/createdata', function (Request $request) {
-//     $success = CustomerMongoDB::create([
+// Route::get('/createdata', function () {
+//      $customer = CustomerMongoDB::create([
 //         'guid'=> '3',
 //         'first_name'=> 'Raman',
 //         'family_name' => 'Prapha',
@@ -66,14 +69,17 @@ Route::get('/create', function (Request  $request) {
 //             'pin code' => "620013",
 //         ],
 //     ]);
-
+//      return response()->json([
+//     'message' => 'Data created successfully',
+//     'data' => $customer,
+//  ]);
 // });
 
 
 //Create nested data using arrays and objects
 
-Route::get('/createdata', function (Request $request) {
-    $success = CustomerMongoDB::create([
+Route::get('/createdata', function () {
+    $customer = CustomerMongoDB::create([
         'guid'=> '4',
         'first_name'=> 'Abi',
         'family_name' => 'Nice family',
@@ -84,26 +90,45 @@ Route::get('/createdata', function (Request $request) {
             'pin code' => "620017",
         ],
     ]);
-
+    return response()->json([
+        'message' => 'Data created successfully',
+        'data' => $customer,
+    ], 200);
 });
 
 
 //Read data
 
-Route::get('/find_eloquent', function (Request  $request) {
-    $customer = CustomerMongoDB::where('guid', '1')->get();
+Route::get('/find_eloquent', function () {
+    $customer = CustomerMongoDB::where('guid', '4')->get();
+
+
+    return response()->json([
+        'message' => 'Data retrieved successfully',
+        'data' => $customer,
+    ], 200);
 });
 
 
 //Update data using MongoDB query
-Route::get('/update_eloquent', function (Request  $request) {
-    $result = CustomerMongoDB::where('guid', '1')->update( ['first_name' => 'Jimmy'] );
+Route::get('/update_eloquent', function () {
+    CustomerMongoDB::where('guid', '2')->update( ['first_name' => 'Dharshini'] );
+    $updatedCustomer = CustomerMongoDB::where('guid', '2')->get();
+    return response()->json([
+        'message' => 'Data updated successfully',
+        'data' => $updatedCustomer,
+    ],200);
    });
 
 
 //delete data using MongoDB query
-Route::get('/delete_eloquent', function (Request  $request) {
-    $result = CustomerMongoDB::where('guid', '1')->delete();
+Route::get('/delete_eloquent', function () {
+    $customer = CustomerMongoDB::where('guid', '1')->delete();
+
+    return response()->json([
+        'message' => 'Data deleted successfully',
+        'data' => $customer,
+    ],200);
    });
 
 
